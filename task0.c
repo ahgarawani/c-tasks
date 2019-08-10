@@ -4,37 +4,45 @@
 #include <ctype.h>
 
 
-int add(int *numbers, int length) //The function that calculates the sum of the numbers in an array called 'numbers'
+//The function that calculates the sum of the numbers in an array called 'numbers'
+int add(int *numbers, int length)
 {
     int result = 0;
-    for (int i = 0; i < length; i++) //The sum is calculated by iterating over each element of the array and adding them to the variable 'result'
+    //The sum is calculated by iterating over each element of the array and adding them to the variable 'result'
+    for (int i = 0; i < length; i++)
     {
         result = result + numbers[i];
     }
     return result;
 }
 
-int mul(int *numbers, int length) //The function that calculates the product of the numbers in an array called 'numbers'
+//The function that calculates the product of the numbers in an array called 'numbers'
+int mul(int *numbers, int length)
 {
     int result = 1;
-    for (int i = 0; i < length; i++) //The product is calculated by iterating over each element of the array and adding them to the variable 'result'
+    //The product is calculated by iterating over each element of the array and adding them to the variable 'result'
+    for (int i = 0; i < length; i++)
     {
         result = result * numbers[i];
     }
     return result;
 }
 
-char *lowered(char *str) //A function that makes every letter in a string lowercase
+//A function that makes every letter in a string lowercase
+char *lowered(char *str)
 {
     int l = strlen(str);
+
+    //Allocate a space in the memory for the new string
     char *low_str;
-    low_str = malloc((l + 1) * sizeof(char)); //Allocate a space in the memory for the new string
-    if (low_str == NULL) // Check if allocation wasn't successful
+    low_str = malloc((l + 1) * sizeof(char));
+    // Check if allocation wasn't successful
+    if (low_str == NULL)
     {
-        printf("Memory allocation failed.\n");
-        exit(0);
+        return "error";
     }
-    for (int i = 0; i < l; i++) //Iterate over each character and convert it to lowercase
+    //Iterate over each character and convert it to lowercase
+    for (int i = 0; i < l; i++)
     {
         low_str[i] = tolower(str[i]);
     }
@@ -57,16 +65,21 @@ int main(int argc, char *argv[])
     if (command == NULL)
     {
         printf("Memory allocation failed.\n");
-        exit(0);
+        return 2;
     }
     // convert the entered command to lowercase
     command = lowered(argv[1]);
+    if (strcmp(command, "error"))
+    {
+        printf("Memory allocation failed.\n");
+        return 3;
+    }
 
     //check if the entered command is one of the available commands
     if (strcmp(command, "add") != 0 && strcmp(command, "mul") != 0)
     {
         printf("Unavailable command, available commands are : \"[Add, Mul]\"\n");
-        return 1;
+        return 4;
     }
 
     //Allocate a space in the memory for the array that will contain the numbers
@@ -76,7 +89,7 @@ int main(int argc, char *argv[])
     if (numbers == NULL)
     {
         printf("Memory allocation failed.\n");
-        exit(0);
+        return 5;
     }
     int no_of_numbers = 0; //the size of the 'numbers' array
 
