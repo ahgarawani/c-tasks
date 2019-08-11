@@ -39,7 +39,7 @@ char *lowered(char *str)
     // Check if allocation wasn't successful
     if (low_str == NULL)
     {
-        return "error";
+        return NULL;
     }
     //Iterate over each character and convert it to lowercase
     for (int i = 0; i < l; i++)
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     }
     // convert the entered command to lowercase
     command = lowered(argv[1]);
-    if (strcmp(command, "error"))
+    if (command == NULL)
     {
         printf("Memory allocation failed.\n");
         return 3;
